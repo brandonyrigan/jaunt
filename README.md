@@ -12,3 +12,4 @@ A travel planner for small excursions
 
 
 ![image](./HomePageWire.png)
+![image](./IndividualCardWire.png)
