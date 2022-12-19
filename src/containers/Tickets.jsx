@@ -38,13 +38,19 @@ class Tickets extends React.Component {
           const value = eventsSet.has(event.name);
           eventsSet.add(event.name);
           return !value;
-        })
-
-        this.setState(() => {
+        });
+        const eventsArray = eventsSetArray.map(event => {
             return {
-                mappedTickets: this.eventsSetArray.map(this.mapTicket)
+              name: event.name,
+              city: event._embedded.venues[0].city.name,
+              image: event.images[0].url,
+              venue: event._embedded.venues[0].name,
+              date: event.dates.start.localDate,
+              link: event.url
+              
             }
-        })
+          });
+          return eventsArray;
     }
 
 
