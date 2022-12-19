@@ -8,8 +8,6 @@ A travel planner for small excursions
 - As a user, I want my chosen destination to provide deals.
 - As a user, I want my chosen destination to provide weather details.
 - As a user, I want to see different flight options to my destination.
-- As a user, I want to be able to save details I want to a list/calendar/scheduler.
 
-
-![image](./HomePageWire.png)
-![image](./IndividualCardWire.png)
+![image](./wireframe/HomePageWire.png)
+![image](./wireframe/IndividualCardWire.png)
