@@ -29,19 +29,19 @@ const getAmadeusKey = async () => {
   );
 
   const responseData = await response.json();
-  const access_token = responseData.access_token;
+  const access_token = await responseData.access_token;
 
   getHotelListByIataCode(access_token);
   console.log(access_token);
 
   return access_token;
 };
-getAmadeusKey();
 
 const getHotelListByIataCode = async () => {
   const cityCode = "San";
   const url = `https://test.api.amadeus.com/v1/reference-data/locations/hotels/by-city?cityCode=${cityCode}&radius=30&radiusUnit=mile&ratings=2,3,4,5`;
-  const bearerToken = "NW4aHcoJoDCOhctWH9ILDZBrNEaG";
+  // const postCall = getAmadeusKey();
+  const bearerToken = "iOFV6Twt3wvdVUkxTL3Y3mGGN8Cw";
   const getHotelOffers = [];
 
   const response = await getData(url, {
@@ -56,13 +56,13 @@ const getHotelListByIataCode = async () => {
     .then((response) => {
       const dataSliced = response.data.slice(0, 10);
 
-      const firstHotelIdSliced = response.data[0].hotelId;
+      const firstHotelIdSliced = dataSliced[0];
       console.log(firstHotelIdSliced);
 
       if (dataSliced) {
-        for (const hotel of dataSliced.data) {
+        for (const hotel of dataSliced) {
           console.log(hotel);
-          // const hotelId = slicedResponse.data[0].hotelId;
+          const hotelId = hotel.hotelId;
           console.log("hotelId " + hotelId);
           const urlForHotelOffers = `https://test.api.amadeus.com/v3/shopping/hotel-offers?hotelIds=${hotelId}&adults=2`;
 
