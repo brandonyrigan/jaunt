@@ -25,6 +25,7 @@ function showWeather(jsonResponse){
   weatherDiv.innerHTML = weatherHTML.join('');
 }
 
-console.log(getWeather('New York'));
+
+export { getWeather };
 
 
