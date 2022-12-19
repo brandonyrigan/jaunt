@@ -10,7 +10,7 @@ function getWeather(cityName){
 
 // show four day forecast in a single div img and temp for each day
 function showWeather(jsonResponse){
-  const weatherDiv = document.getElementById('weather');
+  const weatherDiv = document.getElementById('weather-tab-pane');
   const weather = jsonResponse.list;
   const weatherHTML = [];
   for (let i = 0; i < weather.length; i += 8) {
@@ -25,6 +25,6 @@ function showWeather(jsonResponse){
   weatherDiv.innerHTML = weatherHTML.join('');
 }
 
+console.log(getWeather('New York'));
 
 
-export { getWeather };

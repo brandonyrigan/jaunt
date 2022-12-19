@@ -33,3 +33,13 @@ body {
     border-radius: 5px;
     padding: 20px;
 }
+
+
+.weather-day {
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: space-between;
+  }
+  
+  
