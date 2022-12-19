@@ -1,8 +1,9 @@
-const apiKey = "639cb3677ad1a991c15beae4";
+import FLIGHT_API_KEY from "../api_keys/keys.js";
+
 const flightBaseUrl = `https://api.flightapi.io/`;
 
 const getFlights = (userInput) => {
-    let apiUrl = `${flightBaseUrl}roundtrip/${apiKey}/${userInput.from}/${userInput.to}/${userInput.startDate}/${userInput.endDate}/${userInput.adults}/${userInput.children}/${userInput.infants}/Economy/USD`;
+    let apiUrl = `${flightBaseUrl}roundtrip/${FLIGHT_API_KEY}/${userInput.from}/${userInput.to}/${userInput.startDate}/${userInput.endDate}/${userInput.adults}/${userInput.children}/${userInput.infants}/Economy/USD`;
 
     return new Promise((resolve, reject) => {
         fetch(apiUrl)
