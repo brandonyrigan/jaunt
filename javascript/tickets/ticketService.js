@@ -66,40 +66,15 @@ function createCards(cardData) {
     container.appendChild(cardElement);
   }
 
-  // Return the container element
   return container;
 }
 
-const cards = getEvents("salt lake city").then(events => {
-  const cardContainer = createCards(events);
-  document.getElementById("cards").appendChild(cardContainer);
-});
+// const cards = getEvents("salt lake city").then(events => {
+//   const cardContainer = createCards(events);
+//   document.getElementById("cards").appendChild(cardContainer);
+// });
 
 
 
 
-console.log(getEvents('Boston'));
-
-
-
-function getWeather(cityName){
-  const urlToFetch = `https://api.openweathermap.org/data/2.5/forecast?q=${cityName}&APPID=26d0216d2bc1472b67d4b3e69210bfed`
-  fetch(urlToFetch)
-    .then(response => response.json())
-    .then(jsonResponse => showWeather(jsonResponse));
-}
-
-
-const weather = getWeather('Boston');
-
-
-// create show weather 
-
-function showWeather(jsonResponse){
-  const weather = jsonResponse.list[0].main.temp;
-  const weatherContainer = document.getElementById('weather');
-  weatherContainer.innerHTML = weather;
-}
-
-
-export { getEvents };
+export {getEvents, createCards}
