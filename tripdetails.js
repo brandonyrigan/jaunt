@@ -1,4 +1,5 @@
 import { getFlights } from "./javascript/flights/flights.js";
+import { getHotelListByIataCode } from "./javascript/hotels/hotels.js";
 
 window.onload = (event) => {
     let tripDetails = {
