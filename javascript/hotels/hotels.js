@@ -37,13 +37,11 @@ const getAmadeusKey = async () => {
   return access_token;
 };
 
-getAmadeusKey();
-
 const getHotelListByIataCode = async (token) => {
   const cityCode = "San";
   const numberOfAdults = "2";
   const radius = "30";
-  const rating = "2,3,4,5";
+  const rating = "4";
   const checkIn = "";
   const checkOut = "";
   const url = `https://test.api.amadeus.com/v1/reference-data/locations/hotels/by-city?cityCode=${cityCode}&radius=${radius}&radiusUnit=mile&ratings=${rating}`;
@@ -109,3 +107,5 @@ const getIataBySearch = async (token) => {
     .then((result) => console.log(result))
     .catch((error) => console.log(error));
 };
+
+getAmadeusKey();
