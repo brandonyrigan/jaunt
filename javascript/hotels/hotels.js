@@ -86,3 +86,26 @@ const getHotelListByIataCode = async (token) => {
       console.log(error);
     });
 };
+
+const getIataBySearch = async (token) => {
+  const searchTerm = `San`;
+  const countryCode = `US`;
+  const subType = `CITY,AIRPORT`;
+  const url = `https://test.api.amadeus.com/v1/reference-data/locations?subType=${subType}&keyword=${searchTerm}&countryCode=${countryCode}`;
+  const bearerToken = `${token}`;
+
+  const response = await getData(url, {
+    method: "GET",
+    headers: {
+      Accept: "application/json",
+      Authorization: `Bearer ${bearerToken}`,
+    },
+    mode: "cors",
+    catch: "default",
+  })
+    .then(async (response) => {
+      console.log(response);
+    })
+    .then((result) => console.log(result))
+    .catch((error) => console.log(error));
+};
