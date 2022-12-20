@@ -80,9 +80,6 @@ const getHotelListByIataCode = async (token) => {
       }
     })
     .catch((error) => console.log(error));
-  // const price = hotel.price;
-  // const roomDetails = hotel.typeEstimated;
-  // showHotel(hotel);
 };
 
 // const getIataBySearch = async (token) => {
