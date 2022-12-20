@@ -31,130 +31,70 @@
                 role="tablist"
             >
                 <li class="nav-item" role="presentation">
-                    <button
-                        class="nav-link active"
-                        id="flights-tab"
-                        data-bs-toggle="tab"
-                        data-bs-target="#flights-tab-pane"
-                        type="button"
-                        role="tab"
-                        aria-controls="flights-tab-pane"
-                        aria-selected="true"
-                    >
-                        Flights
-                    </button>
+                    <a href="#flightsNav" class="active"> Flights </a>
                 </li>
                 <li class="nav-item" role="presentation">
-                    <button
-                        class="nav-link"
-                        id="hotels-tab"
-                        data-bs-toggle="tab"
-                        data-bs-target="#hotels-tab-pane"
-                        type="button"
-                        role="tab"
-                        aria-controls="hotels-tab-pane"
-                        aria-selected="false"
-                    >
-                        Hotels
-                    </button>
+                    <a href="#hotelsNav"> Hotels </a>
                 </li>
                 <li class="nav-item" role="presentation">
-                    <button
-                        class="nav-link"
-                        id="events-tab"
-                        data-bs-toggle="tab"
-                        data-bs-target="#events-tab-pane"
-                        type="button"
-                        role="tab"
-                        aria-controls="events-tab-pane"
-                        aria-selected="false"
-                    >
-                        Events
-                    </button>
+                    <a href="#eventsNav"> Events </a>
                 </li>
                 <li class="nav-item" role="presentation">
-                    <button
-                        class="nav-link"
-                        id="weather-tab"
-                        data-bs-toggle="tab"
-                        data-bs-target="#weather-tab-pane"
-                        type="button"
-                        role="tab"
-                        aria-controls="weather-tab-pane"
-                        aria-selected="false"
-                    >
-                        Weather
-                    </button>
+                    <a href="#weatherNav"> Weather </a>
                 </li>
             </ul>
-            <div class="tab-content" id="myTabContent">
-                <div
-                    class="tab-pane fade show active"
-                    id="flights-tab-pane"
-                    role="tabpanel"
-                    aria-labelledby="flights-tab"
-                    tabindex="0"
-                >
-                    <div id="flights" class="row">
-                        <h1>Flights</h1>
-                        <table class="table">
-                            <thead>
-                                <tr>
-                                    <th scope="col">Flight Times</th>
-                                    <th scope="col">Flight Duration</th>
-                                    <th scope="col"># of Stops</th>
-                                    <th scope="col">Price</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <th scope="row">1</th>
-                                    <td>Mark</td>
-                                    <td>Otto</td>
-                                    <td>@mdo</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">2</th>
-                                    <td>Jacob</td>
-                                    <td>Thornton</td>
-                                    <td>@fat</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">3</th>
-                                    <td>Larry</td>
-                                    <td>the Bird</td>
-                                    <td>@twitter</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
+
+            <div id="flightsNav">
+                <hr />
+            </div>
+            <div id="flightsContainer">
+                <div id="flights" class="row">
+                    <h1>Flights</h1>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">Flight Times</th>
+                                <th scope="col">Flight Duration</th>
+                                <th scope="col"># of Stops</th>
+                                <th scope="col">Price</th>
+                            </tr>
+                        </thead>
+                        <tbody id="flightTableBody"></tbody>
+                    </table>
                 </div>
-                <div
-                    class="tab-pane fade"
-                    id="hotels-tab-pane"
-                    role="tabpanel"
-                    aria-labelledby="hotels-tab"
-                    tabindex="0"
-                >
-                    ...
+            </div>
+
+            <div id="hotelsNav"><hr /></div>
+            <div id="hotelsContainer">
+                <div id="hotels" class="row">
+                    <h1>Hotels</h1>
                 </div>
-                <div
-                    class="tab-pane fade"
-                    id="events-tab-pane"
-                    role="tabpanel"
-                    aria-labelledby="events-tab"
-                    tabindex="0"
-                >
-                    ...
+            </div>
+
+            <div id="eventsNav"><hr /></div>
+            <div id="eventsContainer">
+                <div id="events" class="row">
+                    <h1>Events</h1>
                 </div>
-                <div
-                    class="tab-pane fade"
-                    id="weather-tab-pane"
-                    role="tabpanel"
-                    aria-labelledby="weather-tab"
-                    tabindex="0"
-                >
-                    ...
+            </div>
+
+            <div id="weatherNav">
+                <hr />
+            </div>
+            <div id="weatherContainer">
+                <h1>Weather</h1>
+                <div id="weather" class="row">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">Flight Times</th>
+                                <th scope="col">Flight Duration</th>
+                                <th scope="col"># of Stops</th>
+                                <th scope="col">Price</th>
+                            </tr>
+                        </thead>
+                        <tbody id="flightTableBody"></tbody>
+                    </table>
                 </div>
             </div>
         </div>
@@ -165,5 +105,6 @@
             crossorigin="anonymous"
         ></script>
         <script src="./javascript/weather/weather.js"></script>
+        <script src="./script.js" type="module"></script>
     </body>
 </html>
