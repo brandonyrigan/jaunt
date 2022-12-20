@@ -1,14 +1,3 @@
-function getData(apiURL, optionsObject) {
-  return new Promise((resolve, reject) => {
-    fetch(apiURL, optionsObject)
-      .then((response) => {
-        return response.json();
-      })
-      .then((json) => resolve(json))
-      .catch((error) => reject(error));
-  });
-}
-
 const getAmadeusKey = async () => {
   const data = new URLSearchParams({
     grant_type: "client_credentials",
@@ -37,19 +26,28 @@ const getAmadeusKey = async () => {
   return access_token;
 };
 
-getAmadeusKey();
+function getData(apiURL, optionsObject) {
+  return new Promise((resolve, reject) => {
+    fetch(apiURL, optionsObject)
+      .then((response) => {
+        return response.json();
+      })
+      .then((json) => resolve(json))
+      .catch((error) => reject(error));
+  });
+}
 
 const getHotelListByIataCode = async (token) => {
   const cityCode = "San";
   const numberOfAdults = "2";
   const radius = "30";
-  const rating = "2,3,4,5";
-  const checkIn = "";
-  const checkOut = "";
+  const rating = "4";
+  //   const checkIn = "";
+  //   const checkOut = "";
   const url = `https://test.api.amadeus.com/v1/reference-data/locations/hotels/by-city?cityCode=${cityCode}&radius=${radius}&radiusUnit=mile&ratings=${rating}`;
   const bearerToken = `${token}`;
 
-  const response = await getData(url, {
+  const hotelListByCityResponse = await getData(url, {
     method: "GET",
     headers: {
       Accept: "application/json",
@@ -59,12 +57,13 @@ const getHotelListByIataCode = async (token) => {
     catch: "default",
   })
     .then(async (response) => {
-      const dataSliced = response.data.slice(0, 3);
+      const dataSliced = response.data.slice(0, 10);
       if (dataSliced) {
         for (const hotel of dataSliced) {
           const hotelId = hotel.hotelId;
+          //   const hotelName = hotel.name;
           const urlForHotelOffers = `https://test.api.amadeus.com/v3/shopping/hotel-offers?hotelIds=${hotelId}&adults=${numberOfAdults}`;
-          const newResponse = await getData(urlForHotelOffers, {
+          const hotelOffersResponse = await getData(urlForHotelOffers, {
             method: "GET",
             headers: {
               Accept: "application/json",
@@ -72,40 +71,63 @@ const getHotelListByIataCode = async (token) => {
             },
             mode: "cors",
             catch: "default",
-          });
+          })
+            .then((response) => showHotel(response))
+            .catch((error) => console.log(error));
         }
       } else {
         throw new Error("some error");
       }
     })
-    .then((response) => {
-      console.log(response);
-    })
-    .then((result) => console.log(result))
-    .catch((error) => {
-      console.log(error);
-    });
-};
-
-const getIataBySearch = async (token) => {
-  const searchTerm = `San`;
-  const countryCode = `US`;
-  const subType = `CITY,AIRPORT`;
-  const url = `https://test.api.amadeus.com/v1/reference-data/locations?subType=${subType}&keyword=${searchTerm}&countryCode=${countryCode}`;
-  const bearerToken = `${token}`;
-
-  const response = await getData(url, {
-    method: "GET",
-    headers: {
-      Accept: "application/json",
-      Authorization: `Bearer ${bearerToken}`,
-    },
-    mode: "cors",
-    catch: "default",
-  })
-    .then(async (response) => {
-      console.log(response);
-    })
-    .then((result) => console.log(result))
     .catch((error) => console.log(error));
+  // const price = hotel.price;
+  // const roomDetails = hotel.typeEstimated;
+  // showHotel(hotel);
 };
+
+// const getIataBySearch = async (token) => {
+//   const searchTerm = `San`;
+//   const countryCode = `US`;
+//   const subType = `CITY,AIRPORT`;
+//   const url = `https://test.api.amadeus.com/v1/reference-data/locations?subType=${subType}&keyword=${searchTerm}&countryCode=${countryCode}`;
+//   const bearerToken = `${token}`;
+
+//   const response = await getData(url, {
+//     method: "GET",
+//     headers: {
+//       Accept: "application/json",
+//       Authorization: `Bearer ${bearerToken}`,
+//     },
+//     mode: "cors",
+//     catch: "default",
+//   })
+//     .then(async (response) => {
+//       console.log(response);
+//     })
+//     .then((result) => console.log(result))
+//     .catch((error) => console.log(error));
+// };
+
+getAmadeusKey();
+
+function showHotel(data) {
+  const hotelDetails = data.data[0];
+  const hotelPriceDetails = data.data[0].offers[0];
+  console.log(hotelDetails);
+  console.log(hotelPriceDetails);
+  const tableRow = document.createElement("tr");
+  const hotelName = document.createElement("td");
+  const hotelRoomDetails = document.createElement("td");
+  const hotelPrice = document.createElement("td");
+
+  hotelName.innerText = `${hotelDetails.hotel.name}`;
+  hotelRoomDetails.innerText = `${hotelPriceDetails.room.typeEstimated.bedType}`;
+  hotelPrice.innerText = `${hotelPriceDetails.price.base}`;
+
+  tableRow.appendChild(hotelName);
+  tableRow.appendChild(hotelRoomDetails);
+  tableRow.appendChild(hotelPrice);
+  hotelTableBody.appendChild(tableRow);
+}
+
+export { getHotelListByIataCode };
