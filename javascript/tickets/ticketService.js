@@ -40,41 +40,37 @@ async function getEvents(cityName) {
 
 function createCards(cardData) {
   // Create a container element to hold all the cards
-  const container = document.createElement("div");
-  container.classList.add("card-container");
-
+  const container = document.getElementById('events-tab-pane');
+  const cardhtml = [];
   // Loop through the cardData array
   for (let i = 0; i < cardData.length; i++) {
     // Get the current card object
     const card = cardData[i];
 
-    // Create a div element for the card
-    const cardElement = document.createElement("div");
-    cardElement.classList.add("card");
 
     // Set the card's title, image, description, and link
-    cardElement.innerHTML = `
-      <h2>${card.name}</h2>
-      <img src="${card.image}" alt="${card.name}">
-      <p>${card.city}</p>
-      <p>${card.venue}</p>
-      <p>${card.date}</p>
-      
-    `;
+    cardhtml.push( `
+<div class="card" style="width: 18rem;">
+  <img src="${card.image}" class="card-img-top" alt="${card.name}">
+  <div class="card-body">
+    <h5 class="card-title">${card.name}</h5>
+    <p class="card-text">${card.city}</p>
+    <p class="card-text">${card.venue}</p>
+    <p class="card-text">${card.date}</p>
+    <a href="${card.link}" class="btn btn-primary">Buy Tickets</a>
+  </div>
+</div>
+`);
 
     // Add the card element to the container
-    container.appendChild(cardElement);
+    container.innerHTML = cardhtml.join('');
   }
 
+  // Return the container element
   return container;
 }
+ 
 
-// const cards = getEvents("salt lake city").then(events => {
-//   const cardContainer = createCards(events);
-//   document.getElementById("cards").appendChild(cardContainer);
-// });
+export { getEvents, createCards };
 
 
-
-
-export {getEvents, createCards}
