@@ -1,6 +1,6 @@
-function getData(apiURL, something) {
+function getData(apiURL, optionsObject) {
   return new Promise((resolve, reject) => {
-    fetch(apiURL, something)
+    fetch(apiURL, optionsObject)
       .then((response) => {
         return response.json();
       })
@@ -29,20 +29,25 @@ const getAmadeusKey = async () => {
   );
 
   const responseData = await response.json();
-  const access_token = responseData.access_token;
+  const access_token = await responseData.access_token;
 
   getHotelListByIataCode(access_token);
   console.log(access_token);
 
   return access_token;
 };
+
 getAmadeusKey();
 
-const getHotelListByIataCode = async () => {
+const getHotelListByIataCode = async (token) => {
   const cityCode = "San";
-  const url = `https://test.api.amadeus.com/v1/reference-data/locations/hotels/by-city?cityCode=${cityCode}&radius=30&radiusUnit=mile&ratings=2,3,4,5`;
-  const bearerToken = "NW4aHcoJoDCOhctWH9ILDZBrNEaG";
-  const getHotelOffers = [];
+  const numberOfAdults = "2";
+  const radius = "30";
+  const rating = "2,3,4,5";
+  const checkIn = "";
+  const checkOut = "";
+  const url = `https://test.api.amadeus.com/v1/reference-data/locations/hotels/by-city?cityCode=${cityCode}&radius=${radius}&radiusUnit=mile&ratings=${rating}`;
+  const bearerToken = `${token}`;
 
   const response = await getData(url, {
     method: "GET",
@@ -53,20 +58,13 @@ const getHotelListByIataCode = async () => {
     mode: "cors",
     catch: "default",
   })
-    .then((response) => {
-      const dataSliced = response.data.slice(0, 10);
-
-      const firstHotelIdSliced = response.data[0].hotelId;
-      console.log(firstHotelIdSliced);
-
+    .then(async (response) => {
+      const dataSliced = response.data.slice(0, 3);
       if (dataSliced) {
-        for (const hotel of dataSliced.data) {
-          console.log(hotel);
-          // const hotelId = slicedResponse.data[0].hotelId;
-          console.log("hotelId " + hotelId);
-          const urlForHotelOffers = `https://test.api.amadeus.com/v3/shopping/hotel-offers?hotelIds=${hotelId}&adults=2`;
-
-          const newResponse = getData(urlForHotelOffers, {
+        for (const hotel of dataSliced) {
+          const hotelId = hotel.hotelId;
+          const urlForHotelOffers = `https://test.api.amadeus.com/v3/shopping/hotel-offers?hotelIds=${hotelId}&adults=${numberOfAdults}`;
+          const newResponse = await getData(urlForHotelOffers, {
             method: "GET",
             headers: {
               Accept: "application/json",
@@ -75,18 +73,16 @@ const getHotelListByIataCode = async () => {
             mode: "cors",
             catch: "default",
           });
-
-          getHotelOffers.push(newResponse);
         }
       } else {
         throw new Error("some error");
       }
     })
-    .then((data) => {
-      console.log(data);
+    .then((response) => {
+      console.log(response);
     })
+    .then((result) => console.log(result))
     .catch((error) => {
       console.log(error);
     });
 };
-getHotelListByIataCode();
