@@ -22,6 +22,7 @@ h1 {
     position: -webkit-sticky;
     position: sticky;
     top: 0;
+    z-index: 1;
 }
 
 .nav {
@@ -111,16 +112,14 @@ h1 {
     align-items: center;
     justify-content: space-between;
     margin: 10px 70px;
+    
   }
 
-/* card-tab-pane grows to fit the content */
-.card-tab-pane {
+/* card-tab-pane grow to fit card */
+.tab-pane {
     flex-grow: 1;
-  }
+}
 
-  
-
-  
 
 
   

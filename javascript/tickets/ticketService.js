@@ -71,6 +71,6 @@ function createCards(cardData) {
 }
  
 
-const city = getEvents('New York').then(events => createCards(events));
+export { getEvents, createCards };
 
 
