@@ -42,5 +42,25 @@ body {
     justify-content: space-between;
     margin: 10px 70px;
   }
+
+/* all cards in a row side by side */
+.card {
+    display: inline-flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: space-between;
+    margin: 10px 70px;
+  }
+
+/* card-tab-pane grows to fit the content */
+.card-tab-pane {
+    flex-grow: 1;
+  }
+
+  
+
+  
+
+
   
   
