@@ -61,7 +61,6 @@ const getHotelListByIataCode = async (token) => {
       if (dataSliced) {
         for (const hotel of dataSliced) {
           const hotelId = hotel.hotelId;
-          //   const hotelName = hotel.name;
           const urlForHotelOffers = `https://test.api.amadeus.com/v3/shopping/hotel-offers?hotelIds=${hotelId}&adults=${numberOfAdults}`;
           const hotelOffersResponse = await getData(urlForHotelOffers, {
             method: "GET",
