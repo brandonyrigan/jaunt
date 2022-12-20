@@ -1,55 +1,47 @@
-
-
-const baseurl = 'https://app.ticketmaster.com/discovery/v2/events.json?';
-const apikey = 'Lb9duPQSfmOhyMAeBS88Dxum5ksUZAPO';
-
+const baseurl = "https://app.ticketmaster.com/discovery/v2/events.json?";
+const apikey = "Lb9duPQSfmOhyMAeBS88Dxum5ksUZAPO";
 
 async function getEvents(cityName) {
-  const urlToFetch = baseurl + 'apikey=' + apikey + '&city=' + cityName;
-  try {
-    const response = await fetch(urlToFetch);
-    if (response.ok) {
-      const jsonResponse = await response.json();
-      const events = jsonResponse._embedded.events;
-      const eventsSet = new Set();
-      const eventsSetArray = events.filter(event => {
-        const value = eventsSet.has(event.name);
-        eventsSet.add(event.name);
-        return !value;
-      });
-      const eventsArray = eventsSetArray.map(event => {
-        return {
-          name: event.name,
-          city: event._embedded.venues[0].city.name,
-          image: event.images[0].url,
-          venue: event._embedded.venues[0].name,
-          date: event.dates.start.localDate,
-          link: event.url
-          
+    const urlToFetch = baseurl + "apikey=" + apikey + "&city=" + cityName;
+    try {
+        const response = await fetch(urlToFetch);
+        if (response.ok) {
+            const jsonResponse = await response.json();
+            const events = jsonResponse._embedded.events;
+            const eventsSet = new Set();
+            const eventsSetArray = events.filter((event) => {
+                const value = eventsSet.has(event.name);
+                eventsSet.add(event.name);
+                return !value;
+            });
+            const eventsArray = eventsSetArray.map((event) => {
+                return {
+                    name: event.name,
+                    city: event._embedded.venues[0].city.name,
+                    image: event.images[0].url,
+                    venue: event._embedded.venues[0].name,
+                    date: event.dates.start.localDate,
+                    link: event.url,
+                };
+            });
+            return eventsArray;
         }
-      });
-      return eventsArray;
+    } catch (error) {
+        console.log(error);
     }
-  } catch (error) {
-    console.log(error);
-  }
 }
 
-
-
-
 function createCards(cardData) {
-  // Create a container element to hold all the cards
-  const container = document.getElementById('events-tab-pane');
-  const cardhtml = [];
-  // Loop through the cardData array
-  for (let i = 0; i < cardData.length; i++) {
-    // Get the current card object
-    const card = cardData[i];
+    // Create a container element to hold all the cards
+    const container = document.getElementById("events");
+    const cardhtml = [];
+    // Loop through the cardData array
+    for (let i = 0; i < cardData.length; i++) {
+        // Get the current card object
+        const card = cardData[i];
 
-
-    // Set the card's title, image, description, and link
-    cardhtml.push( `
+        // Set the card's title, image, description, and link
+        cardhtml.push(`
 <div class="card" style="width: 18rem;">
   <img src="${card.image}" class="card-img-top" alt="${card.name}">
   <div class="card-body">
@@ -62,15 +54,12 @@ function createCards(cardData) {
 </div>
 `);
 
-    // Add the card element to the container
-    container.innerHTML = cardhtml.join('');
-  }
+        // Add the card element to the container
+        container.innerHTML = cardhtml.join("");
+    }
 
-  // Return the container element
-  return container;
+    // Return the container element
+    return container;
 }
- 
 
 export { getEvents, createCards };
-
-

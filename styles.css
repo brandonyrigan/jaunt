@@ -22,7 +22,7 @@ h1 {
     position: -webkit-sticky;
     position: sticky;
     top: 0;
-    z-index: 1;
+    
 }
 
 .nav {
@@ -31,6 +31,7 @@ h1 {
   text-align: center;
   box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
   background: #3fa46a;
+  z-index: 1;
 }
 
 .nav a {
@@ -39,16 +40,16 @@ h1 {
   color: white;
   font-size: 20px;
   text-decoration: none;
-  /* border-top: 4px solid transparent;
-  border-bottom: 4px solid transparent; */
   padding: 20px 15px;
   margin: 0 5px;
   font-size: 20px;
+  z-index: 1;
 }
 .nav a:hover {
   border-top: 4px solid white;
   border-bottom: 4px solid white;
   padding: 6px 0; 
+  z-index: 1;
 }
 
 .focus {
