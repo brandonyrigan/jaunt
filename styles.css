@@ -101,7 +101,8 @@ h1 {
     flex-wrap: nowrap;
     align-items: center;
     justify-content: space-between;
-}
+    margin: 10px 70px;
+  }
   
 #flightsNav {
     height: 20px;
