@@ -2,12 +2,10 @@ import { FLIGHT_API_KEY } from "../api_keys/keys.js";
 
 const flightBaseUrl = `https://api.flightapi.io/`;
 
-function getFlights() {
-    //let apiUrl = `${flightBaseUrl}roundtrip/${FLIGHT_API_KEY}/${userInput.from}/${userInput.to}/${userInput.startDate}/${userInput.endDate}/${userInput.adults}/${userInput.children}/${userInput.infants}/Economy/USD`;
+function getFlights(userInput) {
+    let apiUrl = `${flightBaseUrl}roundtrip/${FLIGHT_API_KEY}/${userInput.fromLocation}/${userInput.toLocation}/${userInput.startDate}/${userInput.endDate}/1/0/0/Economy/USD`;
 
-    fetch(
-        "https://api.flightapi.io/roundtrip/639cb3677ad1a991c15beae4/LAS/DEN/2023-2-11/2023-2-13/1/0/0/Economy/USD"
-    )
+    fetch(apiUrl)
         .then((res) => res.json())
         .then((response) => {
             let flights = [];
@@ -26,6 +24,7 @@ function getFlights() {
                 if (flightsMap.has(fare.tripId)) {
                     let flightIndex = flightsMap.get(fare.tripId);
                     flights[flightIndex].price = fare.price.totalAmountUsd;
+                    flights[flightIndex].url = fare.handoffUrl;
                 }
             }
 
@@ -50,16 +49,19 @@ function showFlights(flights) {
         const flightDuration = document.createElement("td");
         const flightStops = document.createElement("td");
         const flightPrice = document.createElement("td");
+        const flightUrl = document.createElement("td");
 
         flightTimes.innerText = `${flight.departureTime} - ${flight.arrivalTime}`;
         flightDuration.innerText = `${flight.duration}`;
         flightStops.innerText = `${flight.stopoversCount}`;
         flightPrice.innerText = `${flight.price}`;
+        flightUrl.innerHTML = `<a href="${flight.url}" class="btn btn-success" target="_blank">Website</a>`;
 
         tableRow.appendChild(flightTimes);
         tableRow.appendChild(flightDuration);
         tableRow.appendChild(flightStops);
         tableRow.appendChild(flightPrice);
+        tableRow.appendChild(flightUrl);
         flightTableBody.appendChild(tableRow);
     }
 }
