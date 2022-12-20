@@ -22,6 +22,7 @@ h1 {
     position: -webkit-sticky;
     position: sticky;
     top: 0;
+    z-index: 1;
 }
 
 .nav {
@@ -103,6 +104,24 @@ h1 {
     justify-content: space-between;
     margin: 10px 70px;
   }
+
+/* all cards in a row side by side */
+.card {
+    display: inline-flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: space-between;
+    margin: 10px 70px;
+    
+  }
+
+/* card-tab-pane grow to fit card */
+.tab-pane {
+    flex-grow: 1;
+}
+
+
+
   
 #flightsNav {
     height: 20px;
