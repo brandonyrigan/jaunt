@@ -1,10 +1,10 @@
 const baseurl = "https://app.ticketmaster.com/discovery/v2/events.json?";
 const apikey = "Lb9duPQSfmOhyMAeBS88Dxum5ksUZAPO";
 
-async function getEvents(cityName) {
+ async function getEvents(cityName) {
     const urlToFetch = baseurl + "apikey=" + apikey + "&city=" + cityName;
     try {
-        const response = await fetch(urlToFetch);
+        const response =  fetch(urlToFetch);
         if (response.ok) {
             const jsonResponse = await response.json();
             const events = jsonResponse._embedded.events;
@@ -55,11 +55,18 @@ function createCards(cardData) {
 `);
 
         // Add the card element to the container
-        container.innerHTML = cardhtml.join("");
+        container.innerHTML = cardhtml.join(" ");
     }
 
     // Return the container element
     return container;
+
 }
+
+
+
+// create another function by combining the two functions above
+
+ 
 
 export { getEvents, createCards };
