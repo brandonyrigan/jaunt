@@ -6,13 +6,13 @@ var requestOptions = {
 
 //&format=json&apiKey=YOUR_API_KEY
 
-//return a list of attractions
+
 async function getLongandLat(city) {
     await fetch(`https://api.geoapify.com/v1/geocode/search?text=${city}&format=json&apiKey=${api_key}`, requestOptions)
     .then(response => response.json())
-    .then(result => {
-        const long = result.results[0].lon;
-        const lat = result.results[0].lat;
+    .then(async result => {
+        const long = await result.results[0].lon;
+        const lat = await result.results[0].lat;
         console.log(long, lat);
         getAttractions(long, lat);
     }
@@ -29,13 +29,13 @@ async function getLongandLat(city) {
 
 
 
-// return a list of attractions names, lat, long, and address for a given city
-   function getAttractions(long, lat){
+
+  async function getAttractions(long, lat){
     fetch(`https://api.geoapify.com/v2/places?categories=tourism&filter=circle:${long},${lat},5000&bias=proximity:${long},${lat}&limit=20&apiKey=${api_key}`)
     .then(response => response.json())
-    .then(result => {
+    .then( async result => {
         console.log(result.features);
-        const attractions = result.features.map(attraction => {
+        const attractions = await result.features.map(attraction => {
             return {
                 name: attraction.properties.name,
                 lat: attraction.properties.lat,
@@ -44,27 +44,26 @@ async function getLongandLat(city) {
             }
         })
         console.log(attractions);
-        return attractions;
+        displayAttractions(attractions);
+        
     })
     .catch(error => console.log('error', error));
     }
 
 
-// display attractions on the page loop through the attractions array and display each attraction
+
 async function displayAttractions(attractions){
     const attractionsContainer = document.getElementById('attractions');
     for(let i = 0; i < attractions.length; i++){
         const attraction = attractions[i];
-        const attractionContainer = document.createElement('div');
-        attractionContainer.className = 'attraction';
-        attractionContainer.innerHTML = `
-        <h3>${attraction.name}</h3>
-        <p>${attraction.address}</p>
-        <p>${attraction.lat}</p>
-        <p>${attraction.long}</p>
+        const attractionElement = document.createElement('tr');
+        attractionElement.innerHTML = `
+        <td>${attraction.name}</td>
+        <td><a href="https://maps.google.com/?q=${attraction.lat},${attraction.long}">View on Google Maps</a></td>
         `;
-        attractionsContainer.appendChild(attractionContainer);
-    }
+        attractionsContainer.appendChild(attractionElement);
+    
+}
 }
 
 
@@ -75,11 +74,7 @@ async function displayAttractions(attractions){
 
 
 
-const c = getLongandLat('Seattle');
+export{getLongandLat};
 
-c.then((attractions) => {
-    displayAttractions(attractions);
-}
-)
 
 
