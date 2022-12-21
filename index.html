@@ -40,6 +40,15 @@
 				<div class="mb-3">
 					<label for="tripName" class="form-label">Trip Name</label>
 					<input type="text" id="tripName" class="form-control"/>
+          <div class="col-md-2">
+          <select class="form-select" aria-label="Default select example" id="numberOfAdults">
+            <option value="" disabled selected>Number of adults</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+          </select>
+        </div>
 				</div>
 				<div class="row">
 					<div class="form-group"></div>
@@ -69,7 +78,7 @@
 							type="text"
                             class="form-control"
 							aria-label="From"
-							id="fromDate"
+							id="startDate"
 							placeholder="From Date"
 						/>
 					</div>
@@ -78,12 +87,12 @@
 							type="text"
                             class="form-control"
 							aria-label="From"
-							id="toDate"
+							id="endDate"
 							placeholder="To Date"
 						/>
 					</div>
 				</div>
-				<button type="submit" class="btn btn-primary" id="submitBtn">
+				<button type="submit" class="btn btn-success" id="submitBtn">
 					Submit
 				</button>
 			</form>
@@ -95,7 +104,7 @@
 		<script src="./javascript/home/home.js"></script>
 		<script>
 			$(function () {
-				var from = $("#fromDate")
+				var from = $("#startDate")
 						.datepicker({
 							dateFormat: "yy-mm-dd",
 							changeMonth: true,
@@ -103,7 +112,7 @@
 						.on("change", function () {
 							to.datepicker("option", "minDate", getDate(this));
 						}),
-					to = $("#toDate")
+					to = $("#endDate")
 						.datepicker({
 							dateFormat: "yy-mm-dd",
 							changeMonth: true,

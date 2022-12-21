@@ -1,17 +1,37 @@
 import { getFlights } from "./javascript/flights/flights.js";
-import { getHotelListByIataCode } from "./javascript/hotels/hotels.js";
+import { getAmadeusKey } from "./javascript/hotels/hotels.js";
+import { getEvents, createCards } from "./javascript/tickets/ticketService.js"; 
+import {getWeather} from "./javascript/weather/weather.js";
+import {getCity} from "./javascript/helper/helpers.js";
 
-window.onload = (event) => {
+
+window.onload = async (event) => {
   let tripDetails = {
     tripName: localStorage.getItem("tripName"),
     fromLocation: localStorage.getItem("fromLocation"),
     toLocation: localStorage.getItem("toLocation"),
     startDate: localStorage.getItem("startDate"),
     endDate: localStorage.getItem("endDate"),
+    numberOfAdults: localStorage.getItem("numberOfAdults"),
   };
-
+  console.log(tripDetails);
   loadTripDetailsHeader();
-  getFlights(tripDetails);
+//  getFlights(tripDetails);
+// return city name from form input
+  
+  const city = await getCity(tripDetails.toLocation);
+
+  
+  getWeather(city);
+  
+  const events = getEvents(city).then
+  (event => {
+    createCards(event);
+  });
+  
+
+ // getFlights(tripDetails);
+ // getAmadeusKey(tripDetails);
 };
 
 myTab.addEventListener("click", (event) => {

@@ -1,8 +1,10 @@
-const getAmadeusKey = async () => {
+// import { getPhoto } from "../photos/photo";
+
+const getAmadeusKey = async (tripDetails) => {
   const data = new URLSearchParams({
     grant_type: "client_credentials",
-    client_id: "l6lEjdKwsGuvhLUcpPYs5p3UXakFhtiE",
-    client_secret: "lVj4RPAosldSESTM",
+    client_id: "ADnbofc7M6Z8Zq8iBHx8qQ9OURzRjC4p",
+    client_secret: "8PCma3oKwtCV4L8P",
   });
 
   const response = await fetch(
@@ -12,18 +14,14 @@ const getAmadeusKey = async () => {
       headers: {
         Accept: "application/json",
       },
-
       body: data,
     }
   );
 
   const responseData = await response.json();
   const access_token = await responseData.access_token;
-
-  getHotelListByIataCode(access_token);
-  console.log(access_token);
-
-  return access_token;
+  const tripInfo = tripDetails;
+  getHotelListByIataCode(access_token, tripInfo);
 };
 
 function getData(apiURL, optionsObject) {
@@ -37,13 +35,14 @@ function getData(apiURL, optionsObject) {
   });
 }
 
-const getHotelListByIataCode = async (token) => {
-  const cityCode = "San";
-  const numberOfAdults = "2";
+const getHotelListByIataCode = async (token, tripDetails) => {
+  console.log(tripDetails);
+  const cityCode = tripDetails.fromLocation;
+  const numberOfAdults = tripDetails.numberOfAdults;
   const radius = "30";
   const rating = "4";
-  //   const checkIn = "";
-  //   const checkOut = "";
+  const checkIn = tripDetails.fromDate;
+  const checkOut = tripDetails.toDate;
   const url = `https://test.api.amadeus.com/v1/reference-data/locations/hotels/by-city?cityCode=${cityCode}&radius=${radius}&radiusUnit=mile&ratings=${rating}`;
   const bearerToken = `${token}`;
 
@@ -104,8 +103,6 @@ const getHotelListByIataCode = async (token) => {
 //     .catch((error) => console.log(error));
 // };
 
-getAmadeusKey();
-
 function showHotel(data) {
   const hotelDetails = data.data[0];
   const hotelPriceDetails = data.data[0].offers[0];
@@ -120,10 +117,33 @@ function showHotel(data) {
   hotelRoomDetails.innerText = `${hotelPriceDetails.room.typeEstimated.bedType}`;
   hotelPrice.innerText = `${hotelPriceDetails.price.base}`;
 
+  hotelName.onclick = function () {
+    // getPhoto(hotelname);
+    const modalElement = document.createElement("div");
+    modalElement.innerHTML = `
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+    <div class="card" style="width: 18rem;">
+      {/* <img src="..." class="card-img-top" alt="..."/> */}
+      <div class="card-body">
+        <h5 class="card-title">${hotelDetails.hotel.name}</h5>
+        <p class="card-text">Check-In: ${hotelPriceDetails.checkInDate}</p>
+        <p class="card-text">Check-Out: ${hotelPriceDetails.checkOutDate}</p>
+        <button
+          type="button"
+          class="btn-close"
+          data-mdb-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+    </div>
+  </div>
+  `;
+  };
+
   tableRow.appendChild(hotelName);
   tableRow.appendChild(hotelRoomDetails);
   tableRow.appendChild(hotelPrice);
   hotelTableBody.appendChild(tableRow);
 }
 
-export { getHotelListByIataCode };
+export { getAmadeusKey };
