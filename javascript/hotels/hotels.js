@@ -1,4 +1,4 @@
-const getAmadeusKey = async () => {
+const getAmadeusKey = async (tripDetails) => {
   const data = new URLSearchParams({
     grant_type: "client_credentials",
     client_id: "l6lEjdKwsGuvhLUcpPYs5p3UXakFhtiE",
@@ -19,11 +19,11 @@ const getAmadeusKey = async () => {
 
   const responseData = await response.json();
   const access_token = await responseData.access_token;
+  const tripDetails = tripDetails;
+  getHotelListByIataCode(access_token, tripDetails);
+  // console.log(access_token);
 
-  getHotelListByIataCode(access_token);
-  console.log(access_token);
-
-  return access_token;
+  // return access_token;
 };
 
 function getData(apiURL, optionsObject) {
@@ -37,13 +37,14 @@ function getData(apiURL, optionsObject) {
   });
 }
 
-const getHotelListByIataCode = async (token) => {
-  const cityCode = "San";
+const getHotelListByIataCode = async (token, tripDetails) => {
+  const cityCode = tripDetails.fromLocation;
+  console.log(tripDetails);
   const numberOfAdults = "2";
   const radius = "30";
   const rating = "4";
-  //   const checkIn = "";
-  //   const checkOut = "";
+  const checkIn = tripDetails.fromDate;
+  const checkOut = tripDetails.toDate;
   const url = `https://test.api.amadeus.com/v1/reference-data/locations/hotels/by-city?cityCode=${cityCode}&radius=${radius}&radiusUnit=mile&ratings=${rating}`;
   const bearerToken = `${token}`;
 
@@ -104,8 +105,6 @@ const getHotelListByIataCode = async (token) => {
 //     .catch((error) => console.log(error));
 // };
 
-getAmadeusKey();
-
 function showHotel(data) {
   const hotelDetails = data.data[0];
   const hotelPriceDetails = data.data[0].offers[0];
@@ -126,4 +125,4 @@ function showHotel(data) {
   hotelTableBody.appendChild(tableRow);
 }
 
-export { getHotelListByIataCode };
+export { getAmadeusKey };
