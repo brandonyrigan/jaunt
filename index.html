@@ -1,271 +1,293 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-      integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65"
-      crossorigin="anonymous"
-    />
-    <link href="./styles.css" rel="stylesheet" />
-    <link
-      rel="stylesheet"
-      href="//code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css"
-    />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.16.1/lodash.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
-    <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.16.1/lodash.min.js"></script>
-    <script src="https://unpkg.com/fuse.js@2.5.0/src/fuse.min.js"></script>
-    <script src="https://screenfeedcontent.blob.core.windows.net/html/airports.js"></script>
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link
+			href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
+			rel="stylesheet"
+			integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65"
+			crossorigin="anonymous"
+		/>
+		<link href="./styles.css" rel="stylesheet" />
+		<link
+			rel="stylesheet"
+			href="//code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css"
+		/>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.16.1/lodash.min.js"></script>
+		<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+		<script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.16.1/lodash.min.js"></script>
+		<script src="https://unpkg.com/fuse.js@2.5.0/src/fuse.min.js"></script>
+		<script src="https://screenfeedcontent.blob.core.windows.net/html/airports.js"></script>
 
-    <title>Jaunt</title>
-  </head>
-  <body>
-    <div class="container">
-      <form id="tripForm">
-        <div class="mb-3">
-          <label for="tripName" class="form-label">Trip Name</label>
-          <input type="text" id="tripName" />
+		<title>Jaunt</title>
+	</head>
+	<body>
+		<nav class="navbar navbar-expand-lg bg-success">
+			<div class="container-fluid jauntHeader">
+				<h1>Jaunt</h1>
+				
+					<span class="navbar-text">
+						A travel planner for small excursions
+					</span>
+				</div>
+			</div>
+		</nav>
+		<div class="container">
+			<form id="tripForm">
+				<div class="mb-3">
+					<label for="tripName" class="form-label">Trip Name</label>
+					<input type="text" id="tripName" class="form-control"/>
+          <div class="col-md-2">
+          <select class="form-select" aria-label="Default select example" id="numberOfAdults">
+            <option value="" disabled selected>Number of adults</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+          </select>
         </div>
-        <div class="row">
-          <div class="form-group"></div>
-          <div class="col">
-            <input
-              id="fromLocation"
-              class="autocomplete"
-              type="text"
-              placeholder="From"
-              aria-label="From"
-            />
-          </div>
-          <div class="col">
-            <input
-              id="toLocation"
-              class="autocomplete"
-              type="text"
-              placeholder="To"
-              aria-label="To"
-            />
-          </div>
-        </div>
-        <div class="row">
-          <div id="datepicker"></div>
-          <div class="col">
-            <input
-              type="text"
-              aria-label="From"
-              id="fromDate"
-              placeholder="From Date"
-            />
-          </div>
-          <div class="col">
-            <input
-              type="text"
-              aria-label="From"
-              id="toDate"
-              placeholder="To Date"
-            />
-          </div>
-        </div>
-        <button type="submit" class="btn btn-primary" id="submitBtn">
-          Submit
-        </button>
-      </form>
-    </div>
-    <div id="tripContainer" class="container">
-      <h1>My Trips</h1>
-    </div>
-    <script
-      src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
-      integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
-      crossorigin="anonymous"
-    ></script>
-    <script src="./script.js" type="module"></script>
-    <script src="./javascript/home/home.js"></script>
-    <script>
-      $(function () {
-        var from = $("#fromDate")
-            .datepicker({
-              dateFormat: "yy-mm-dd",
-              changeMonth: true,
-            })
-            .on("change", function () {
-              to.datepicker("option", "minDate", getDate(this));
-            }),
-          to = $("#toDate")
-            .datepicker({
-              dateFormat: "yy-mm-dd",
-              changeMonth: true,
-            })
-            .on("change", function () {
-              from.datepicker("option", "maxDate", getDate(this));
-            });
+				</div>
+				<div class="row">
+					<div class="form-group"></div>
+					<div class="col mb-3">
+						<input
+							id="fromLocation"
+							class="autocomplete form-control"
+							type="text"
+							placeholder="From"
+							aria-label="From"
+						/>
+					</div>
+					<div class="col mb-3">
+						<input
+							id="toLocation"
+							class="autocomplete form-control"
+							type="text"
+							placeholder="To"
+							aria-label="To"
+						/>
+					</div>
+				</div>
+				<div class="row">
+					<div id="datepicker"></div>
+					<div class="col mb-3">
+						<input
+							type="text"
+                            class="form-control"
+							aria-label="From"
+							id="startDate"
+							placeholder="From Date"
+						/>
+					</div>
+					<div class="col mb-3">
+						<input
+							type="text"
+                            class="form-control"
+							aria-label="From"
+							id="endDate"
+							placeholder="To Date"
+						/>
+					</div>
+				</div>
+				<button type="submit" class="btn btn-success" id="submitBtn">
+					Submit
+				</button>
+			</form>
+		</div>
+		<div id="tripContainer" class="container">
+			<h1>My Trips</h1>
+		</div>
 
-        function getDate(element) {
-          var date;
-          var dateFormat = "yy-mm-dd";
-          try {
-            date = $.datepicker.parseDate(dateFormat, element.value);
-          } catch (error) {
-            date = null;
-          }
-          console.log(date);
-          return date;
-        }
-      });
-    </script>
-    <script>
-      var options = {
-        shouldSort: true,
-        threshold: 0.4,
-        maxPatternLength: 32,
-        keys: [
-          {
-            name: "iata",
-            weight: 0.5,
-          },
-          {
-            name: "name",
-            weight: 0.3,
-          },
-          {
-            name: "city",
-            weight: 0.2,
-          },
-        ],
-      };
+		<script src="./javascript/home/home.js"></script>
+		<script>
+			$(function () {
+				var from = $("#startDate")
+						.datepicker({
+							dateFormat: "yy-mm-dd",
+							changeMonth: true,
+						})
+						.on("change", function () {
+							to.datepicker("option", "minDate", getDate(this));
+						}),
+					to = $("#endDate")
+						.datepicker({
+							dateFormat: "yy-mm-dd",
+							changeMonth: true,
+						})
+						.on("change", function () {
+							from.datepicker("option", "maxDate", getDate(this));
+						});
 
-      var fuse = new Fuse(airports, options);
+				function getDate(element) {
+					var date;
+					var dateFormat = "yy-mm-dd";
+					try {
+						date = $.datepicker.parseDate(
+							dateFormat,
+							element.value
+						);
+					} catch (error) {
+						date = null;
+					}
+					console.log(date);
+					return date;
+				}
+			});
+		</script>
+		<script>
+			var options = {
+				shouldSort: true,
+				threshold: 0.4,
+				maxPatternLength: 32,
+				keys: [
+					{
+						name: "iata",
+						weight: 0.5,
+					},
+					{
+						name: "name",
+						weight: 0.3,
+					},
+					{
+						name: "city",
+						weight: 0.2,
+					},
+				],
+			};
 
-      $(".autocomplete").each(function () {
-        var ac = $(this);
+			var fuse = new Fuse(airports, options);
 
-        ac.on("click", function (e) {
-          e.stopPropagation();
-        })
-          .on("focus keyup", search)
-          .on("keydown", onKeyDown);
+			$(".autocomplete").each(function () {
+				var ac = $(this);
 
-        var wrap = $("<div>")
-          .addClass("autocomplete-wrapper")
-          .insertBefore(ac)
-          .append(ac);
+				ac.on("click", function (e) {
+					e.stopPropagation();
+				})
+					.on("focus keyup", search)
+					.on("keydown", onKeyDown);
 
-        var list = $("<div>")
-          .addClass("autocomplete-results")
-          .on("click", ".autocomplete-result", function (e) {
-            e.preventDefault();
-            e.stopPropagation();
-            selectIndex($(this).data("index"), ac);
-          })
-          .appendTo(wrap);
-      });
+				var wrap = $("<div>")
+					.addClass("autocomplete-wrapper")
+					.insertBefore(ac)
+					.append(ac);
 
-      $(document)
-        .on("mouseover", ".autocomplete-result", function (e) {
-          var index = parseInt($(this).data("index"), 10);
-          if (!isNaN(index)) {
-            $(this).attr("data-highlight", index);
-          }
-        })
-        .on("click", clearResults);
+				var list = $("<div>")
+					.addClass("autocomplete-results")
+					.on("click", ".autocomplete-result", function (e) {
+						e.preventDefault();
+						e.stopPropagation();
+						selectIndex($(this).data("index"), ac);
+					})
+					.appendTo(wrap);
+			});
 
-      function clearResults() {
-        results = [];
-        numResults = 0;
-        $(".autocomplete-results").empty();
-      }
+			$(document)
+				.on("mouseover", ".autocomplete-result", function (e) {
+					var index = parseInt($(this).data("index"), 10);
+					if (!isNaN(index)) {
+						$(this).attr("data-highlight", index);
+					}
+				})
+				.on("click", clearResults);
 
-      function selectIndex(index, autoinput) {
-        if (results.length >= index + 1) {
-          autoinput.val(results[index].iata);
-          clearResults();
-        }
-      }
+			function clearResults() {
+				results = [];
+				numResults = 0;
+				$(".autocomplete-results").empty();
+			}
 
-      var results = [];
-      var numResults = 0;
-      var selectedIndex = -1;
+			function selectIndex(index, autoinput) {
+				if (results.length >= index + 1) {
+					autoinput.val(results[index].iata);
+					clearResults();
+				}
+			}
 
-      function search(e) {
-        if (e.which === 38 || e.which === 13 || e.which === 40) {
-          return;
-        }
-        var ac = $(e.target);
-        var list = ac.next();
-        if (ac.val().length > 0) {
-          results = _.take(fuse.search(ac.val()), 7);
-          numResults = results.length;
+			var results = [];
+			var numResults = 0;
+			var selectedIndex = -1;
 
-          var divs = results.map(function (r, i) {
-            return (
-              '<div class="autocomplete-result" data-index="' +
-              i +
-              '">' +
-              "<div><b>" +
-              r.iata +
-              "</b> - " +
-              r.name +
-              "</div>" +
-              '<div class="autocomplete-location">' +
-              r.city +
-              ", " +
-              r.country +
-              "</div>" +
-              "</div>"
-            );
-          });
+			function search(e) {
+				if (e.which === 38 || e.which === 13 || e.which === 40) {
+					return;
+				}
+				var ac = $(e.target);
+				var list = ac.next();
+				if (ac.val().length > 0) {
+					results = _.take(fuse.search(ac.val()), 7);
+					numResults = results.length;
 
-          selectedIndex = -1;
-          list.html(divs.join("")).attr("data-highlight", selectedIndex);
-        } else {
-          numResults = 0;
-          list.empty();
-        }
-      }
+					var divs = results.map(function (r, i) {
+						return (
+							'<div class="autocomplete-result" data-index="' +
+							i +
+							'">' +
+							"<div><b>" +
+							r.iata +
+							"</b> - " +
+							r.name +
+							"</div>" +
+							'<div class="autocomplete-location">' +
+							r.city +
+							", " +
+							r.country +
+							"</div>" +
+							"</div>"
+						);
+					});
 
-      function onKeyDown(e) {
-        var ac = $(e.currentTarget);
-        var list = ac.next();
-        switch (e.which) {
-          case 38: // up
-            selectedIndex--;
-            if (selectedIndex <= -1) {
-              selectedIndex = -1;
-            }
-            list.attr("data-highlight", selectedIndex);
-            break;
-          case 13: // enter
-            selectIndex(selectedIndex, ac);
-            break;
-          case 9: // enter
-            selectIndex(selectedIndex, ac);
-            e.stopPropagation();
-            return;
-          case 40: // down
-            selectedIndex++;
-            if (selectedIndex >= numResults) {
-              selectedIndex = numResults - 1;
-            }
-            list.attr("data-highlight", selectedIndex);
-            break;
+					selectedIndex = -1;
+					list.html(divs.join("")).attr(
+						"data-highlight",
+						selectedIndex
+					);
+				} else {
+					numResults = 0;
+					list.empty();
+				}
+			}
 
-          default:
-            return; // exit this handler for other keys
-        }
-        e.stopPropagation();
-        e.preventDefault(); // prevent the default action (scroll / move caret)
-      }
-    </script>
-    <script
-      src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
-      integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
-      crossorigin="anonymous"
-    ></script>
-    <script src="./index.js" type="module"></script>
-  </body>
+			function onKeyDown(e) {
+				var ac = $(e.currentTarget);
+				var list = ac.next();
+				switch (e.which) {
+					case 38: // up
+						selectedIndex--;
+						if (selectedIndex <= -1) {
+							selectedIndex = -1;
+						}
+						list.attr("data-highlight", selectedIndex);
+						break;
+					case 13: // enter
+						selectIndex(selectedIndex, ac);
+						break;
+					case 9: // enter
+						selectIndex(selectedIndex, ac);
+						e.stopPropagation();
+						return;
+					case 40: // down
+						selectedIndex++;
+						if (selectedIndex >= numResults) {
+							selectedIndex = numResults - 1;
+						}
+						list.attr("data-highlight", selectedIndex);
+						break;
+
+					default:
+						return; // exit this handler for other keys
+				}
+				e.stopPropagation();
+				e.preventDefault(); // prevent the default action (scroll / move caret)
+			}
+		</script>
+		<script
+			src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+			integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
+			crossorigin="anonymous"
+		></script>
+		<script src="./index.js" type="module"></script>
+	</body>
 </html>
