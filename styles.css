@@ -7,6 +7,15 @@ h1 {
     height: 10%;
 }
 
+.jauntHeader {
+    max-width: 1000px;
+    color: white;
+}
+
+.navbar-text {
+    color: white;
+}
+
 .container {
     max-width: 1000px;
     margin: 20px auto;
@@ -107,7 +116,7 @@ h1 {
   }
 
 /* all cards in a row side by side */
-.card {
+#events .card {
     display: inline-flex;
     flex-wrap: nowrap;
     align-items: center;
