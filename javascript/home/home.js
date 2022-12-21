@@ -1,11 +1,11 @@
 const input = document.querySelector("input");
 const log = document.getElementById("log");
 
-input.addEventListener("change", updateValue);
+// input.addEventListener("change", updateValue);
 
-function updateValue(e) {
-  log.textContent = e.target.value;
-}
+// function updateValue(e) {
+// 	log.textContent = e.target.value;
+// }
 
 // Get to work here instead of index.html script tag
 // function selectDates() {
@@ -41,4 +41,4 @@ function updateValue(e) {
 //   }
 // }
 
-export { selectDates };
+// export { selectDates };

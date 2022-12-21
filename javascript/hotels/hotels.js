@@ -1,8 +1,10 @@
+// import { getPhoto } from "../photos/photo";
+
 const getAmadeusKey = async (tripDetails) => {
   const data = new URLSearchParams({
     grant_type: "client_credentials",
-    client_id: "l6lEjdKwsGuvhLUcpPYs5p3UXakFhtiE",
-    client_secret: "lVj4RPAosldSESTM",
+    client_id: "ADnbofc7M6Z8Zq8iBHx8qQ9OURzRjC4p",
+    client_secret: "8PCma3oKwtCV4L8P",
   });
 
   const response = await fetch(
@@ -12,18 +14,14 @@ const getAmadeusKey = async (tripDetails) => {
       headers: {
         Accept: "application/json",
       },
-
       body: data,
     }
   );
 
   const responseData = await response.json();
   const access_token = await responseData.access_token;
-  const tripDetails = tripDetails;
-  getHotelListByIataCode(access_token, tripDetails);
-  // console.log(access_token);
-
-  // return access_token;
+  const tripInfo = tripDetails;
+  getHotelListByIataCode(access_token, tripInfo);
 };
 
 function getData(apiURL, optionsObject) {
@@ -38,9 +36,9 @@ function getData(apiURL, optionsObject) {
 }
 
 const getHotelListByIataCode = async (token, tripDetails) => {
-  const cityCode = tripDetails.fromLocation;
   console.log(tripDetails);
-  const numberOfAdults = "2";
+  const cityCode = tripDetails.fromLocation;
+  const numberOfAdults = tripDetails.numberOfAdults;
   const radius = "30";
   const rating = "4";
   const checkIn = tripDetails.fromDate;
@@ -118,6 +116,29 @@ function showHotel(data) {
   hotelName.innerText = `${hotelDetails.hotel.name}`;
   hotelRoomDetails.innerText = `${hotelPriceDetails.room.typeEstimated.bedType}`;
   hotelPrice.innerText = `${hotelPriceDetails.price.base}`;
+
+  hotelName.onclick = function () {
+    // getPhoto(hotelname);
+    const modalElement = document.createElement("div");
+    modalElement.innerHTML = `
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+    <div class="card" style="width: 18rem;">
+      {/* <img src="..." class="card-img-top" alt="..."/> */}
+      <div class="card-body">
+        <h5 class="card-title">${hotelDetails.hotel.name}</h5>
+        <p class="card-text">Check-In: ${hotelPriceDetails.checkInDate}</p>
+        <p class="card-text">Check-Out: ${hotelPriceDetails.checkOutDate}</p>
+        <button
+          type="button"
+          class="btn-close"
+          data-mdb-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+    </div>
+  </div>
+  `;
+  };
 
   tableRow.appendChild(hotelName);
   tableRow.appendChild(hotelRoomDetails);

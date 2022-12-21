@@ -6,8 +6,9 @@ window.onload = (event) => {
     tripName: localStorage.getItem("tripName"),
     fromLocation: localStorage.getItem("fromLocation"),
     toLocation: localStorage.getItem("toLocation"),
-    startDate: localStorage.getItem("fromDate"),
-    endDate: localStorage.getItem("toDate"),
+    startDate: localStorage.getItem("startDate"),
+    endDate: localStorage.getItem("endDate"),
+    numberOfAdults: localStorage.getItem("numberOfAdults"),
   };
   console.log(tripDetails);
   loadTripDetailsHeader();
