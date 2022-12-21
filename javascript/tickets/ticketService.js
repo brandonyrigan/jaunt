@@ -62,4 +62,5 @@ function createCards(cardData) {
     return container;
 }
 
+
 export { getEvents, createCards };

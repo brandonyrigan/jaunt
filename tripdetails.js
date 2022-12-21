@@ -1,5 +1,9 @@
 import { getFlights } from "./javascript/flights/flights.js";
 import { getHotelListByIataCode } from "./javascript/hotels/hotels.js";
+import { getEvents, createCards } from "./javascript/tickets/ticketService.js"; 
+import {getCity} from "./javascript/helper/helpers.js";
+import {getWeather} from "./javascript/weather/weather.js";
+
 
 window.onload = (event) => {
   let tripDetails = {
@@ -12,6 +16,18 @@ window.onload = (event) => {
 
   loadTripDetailsHeader();
   getFlights(tripDetails);
+  let cityName = getCity(tripDetails.to);
+  
+
+  getEvents(cityName).then((events) => {
+    createCards(events);
+  }
+  );
+
+  getWeather(cityName);
+
+  
+
 };
 
 myTab.addEventListener("click", (event) => {
