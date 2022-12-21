@@ -8,7 +8,7 @@ var requestOptions = {
 
 //return a list of attractions
 async function getLongandLat(city) {
-    fetch(`https://api.geoapify.com/v1/geocode/search?text=${city}&format=json&apiKey=${api_key}`, requestOptions)
+    await fetch(`https://api.geoapify.com/v1/geocode/search?text=${city}&format=json&apiKey=${api_key}`, requestOptions)
     .then(response => response.json())
     .then(result => {
         const long = result.results[0].lon;
@@ -30,7 +30,7 @@ async function getLongandLat(city) {
 
 
 // return a list of attractions names, lat, long, and address for a given city
-  function getAttractions(long, lat){
+   function getAttractions(long, lat){
     fetch(`https://api.geoapify.com/v2/places?categories=tourism&filter=circle:${long},${lat},5000&bias=proximity:${long},${lat}&limit=20&apiKey=${api_key}`)
     .then(response => response.json())
     .then(result => {
@@ -50,8 +50,36 @@ async function getLongandLat(city) {
     }
 
 
+// display attractions on the page loop through the attractions array and display each attraction
+async function displayAttractions(attractions){
+    const attractionsContainer = document.getElementById('attractions');
+    for(let i = 0; i < attractions.length; i++){
+        const attraction = attractions[i];
+        const attractionContainer = document.createElement('div');
+        attractionContainer.className = 'attraction';
+        attractionContainer.innerHTML = `
+        <h3>${attraction.name}</h3>
+        <p>${attraction.address}</p>
+        <p>${attraction.lat}</p>
+        <p>${attraction.long}</p>
+        `;
+        attractionsContainer.appendChild(attractionContainer);
+    }
+}
+
+
+
+
+
+
 
 
 
 const c = getLongandLat('Seattle');
-console.log(c);
+
+c.then((attractions) => {
+    displayAttractions(attractions);
+}
+)
+
+
