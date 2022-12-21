@@ -10,9 +10,9 @@ var requestOptions = {
 async function getLongandLat(city) {
     await fetch(`https://api.geoapify.com/v1/geocode/search?text=${city}&format=json&apiKey=${api_key}`, requestOptions)
     .then(response => response.json())
-    .then(result => {
-        const long = result.results[0].lon;
-        const lat = result.results[0].lat;
+    .then(async result => {
+        const long = await result.results[0].lon;
+        const lat = await result.results[0].lat;
         console.log(long, lat);
         getAttractions(long, lat);
     }
@@ -30,12 +30,12 @@ async function getLongandLat(city) {
 
 
 // return a list of attractions names, lat, long, and address for a given city
-   function getAttractions(long, lat){
+  async function getAttractions(long, lat){
     fetch(`https://api.geoapify.com/v2/places?categories=tourism&filter=circle:${long},${lat},5000&bias=proximity:${long},${lat}&limit=20&apiKey=${api_key}`)
     .then(response => response.json())
-    .then(result => {
+    .then( async result => {
         console.log(result.features);
-        const attractions = result.features.map(attraction => {
+        const attractions = await result.features.map(attraction => {
             return {
                 name: attraction.properties.name,
                 lat: attraction.properties.lat,
@@ -44,7 +44,8 @@ async function getLongandLat(city) {
             }
         })
         console.log(attractions);
-        return attractions;
+        displayAttractions(attractions);
+        
     })
     .catch(error => console.log('error', error));
     }
@@ -59,9 +60,6 @@ async function displayAttractions(attractions){
         attractionContainer.className = 'attraction';
         attractionContainer.innerHTML = `
         <h3>${attraction.name}</h3>
-        <p>${attraction.address}</p>
-        <p>${attraction.lat}</p>
-        <p>${attraction.long}</p>
         `;
         attractionsContainer.appendChild(attractionContainer);
     }
@@ -77,9 +75,6 @@ async function displayAttractions(attractions){
 
 const c = getLongandLat('Seattle');
 
-c.then((attractions) => {
-    displayAttractions(attractions);
-}
-)
+
 
 
