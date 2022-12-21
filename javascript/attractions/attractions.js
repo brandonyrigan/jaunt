@@ -73,7 +73,7 @@ async function displayAttractions(attractions){
 
 
 
-const c = getLongandLat('Seattle');
+export {getLongandLat}
 
 
 
