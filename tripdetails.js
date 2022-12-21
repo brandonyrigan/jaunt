@@ -3,7 +3,7 @@ import { getAmadeusKey } from "./javascript/hotels/hotels.js";
 import { getEvents, createCards } from "./javascript/tickets/ticketService.js";
 import { getWeather } from "./javascript/weather/weather.js";
 import { getCity } from "./javascript/helper/helpers.js";
-import	{getLongandLat} from "./javascript/attractions/attractions.js"
+import { getLongandLat } from "./javascript/attractions/attractions.js";
 
 window.onload = async (event) => {
   let tripDetails = {
@@ -24,17 +24,11 @@ window.onload = async (event) => {
 
   getWeather(city);
 
-<<<<<<< HEAD
   const events = getEvents(city).then((event) => {
     createCards(event);
   });
-=======
-	const events = getEvents(city).then((event) => {
-		createCards(event);
-	});
 
-	getLongandLat(city);
->>>>>>> a3c6bc2805b4442cfb17aca0b268c94ee648dfce
+  getLongandLat(city);
 };
 
 myTab.addEventListener("click", (event) => {
