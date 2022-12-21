@@ -25,27 +25,37 @@
 		<title>Jaunt</title>
 	</head>
 	<body>
+		<nav class="navbar navbar-expand-lg bg-success">
+			<div class="container-fluid jauntHeader">
+				<h1>Jaunt</h1>
+				
+					<span class="navbar-text">
+						A travel planner for small excursions
+					</span>
+				</div>
+			</div>
+		</nav>
 		<div class="container">
 			<form id="tripForm">
 				<div class="mb-3">
 					<label for="tripName" class="form-label">Trip Name</label>
-					<input type="text" id="tripName" />
+					<input type="text" id="tripName" class="form-control"/>
 				</div>
 				<div class="row">
 					<div class="form-group"></div>
-					<div class="col">
+					<div class="col mb-3">
 						<input
 							id="fromLocation"
-							class="autocomplete"
+							class="autocomplete form-control"
 							type="text"
 							placeholder="From"
 							aria-label="From"
 						/>
 					</div>
-					<div class="col">
+					<div class="col mb-3">
 						<input
 							id="toLocation"
-							class="autocomplete"
+							class="autocomplete form-control"
 							type="text"
 							placeholder="To"
 							aria-label="To"
@@ -54,17 +64,19 @@
 				</div>
 				<div class="row">
 					<div id="datepicker"></div>
-					<div class="col">
+					<div class="col mb-3">
 						<input
 							type="text"
+                            class="form-control"
 							aria-label="From"
 							id="fromDate"
 							placeholder="From Date"
 						/>
 					</div>
-					<div class="col">
+					<div class="col mb-3">
 						<input
 							type="text"
+                            class="form-control"
 							aria-label="From"
 							id="toDate"
 							placeholder="To Date"

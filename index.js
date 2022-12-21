@@ -1,15 +1,11 @@
 import { getPhoto } from "./javascript/photos/photo.js";
 import { getCurrentWeather } from "./javascript/weather/weather.js";
+import { getCity } from "./javascript/helper/helpers.js";
 
 tripForm.addEventListener("submit", (event) => {
 	event.preventDefault();
 
-	const getPhotoAttempts = [];
-	const getCurrentWeatherAttempts = [];
-	getPhotoAttempts.push(getPhoto("vacation"));
-	getCurrentWeatherAttempts.push(getCurrentWeather("Denver"));
-
-	Promise.all([getPhoto("vacation"), getCurrentWeather("Denver")])
+	Promise.all([getPhoto(tripName.value), getCurrentWeather("las vegas")])
 		.then((json) => {
 			let tripName = document.getElementById("tripName");
 			let fromLocation = document.getElementById("fromLocation");
@@ -55,10 +51,6 @@ tripForm.addEventListener("submit", (event) => {
 
 			tripForm.reset();
 		})
-		.catch((err) => console.log(err));
-
-	getCurrentWeather("Denver")
-		.then((json) => {})
 		.catch((err) => console.log(err));
 
 	tripContainer.addEventListener("click", (event) => {
