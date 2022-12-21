@@ -1,6 +1,5 @@
 import { getFlights } from "./javascript/flights/flights.js";
 import { getAmadeusKey } from "./javascript/hotels/hotels.js";
-import { getHotelListByIataCode } from "./javascript/hotels/hotels.js";
 import { getEvents, createCards } from "./javascript/tickets/ticketService.js"; 
 import {getWeather} from "./javascript/weather/weather.js";
 import {getCity} from "./javascript/helper/helpers.js";
@@ -25,12 +24,14 @@ window.onload = async (event) => {
   
   getWeather(city);
   
-  const events = getEvents(city)
+  const events = getEvents(city).then
+  (event => {
+    createCards(event);
+  });
   
-  createCards(events);
 
  // getFlights(tripDetails);
-  getAmadeusKey(tripDetails);
+ // getAmadeusKey(tripDetails);
 };
 
 myTab.addEventListener("click", (event) => {
