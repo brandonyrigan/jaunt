@@ -16,6 +16,10 @@ window.onload = async (event) => {
   };
   console.log(tripDetails);
   loadTripDetailsHeader();
+<<<<<<< HEAD
+  // getFlights(tripDetails);
+  getAmadeusKey(tripDetails);
+=======
 //  getFlights(tripDetails);
 // return city name from form input
   
@@ -32,6 +36,7 @@ window.onload = async (event) => {
 
  // getFlights(tripDetails);
  // getAmadeusKey(tripDetails);
+>>>>>>> bf3bc5c025d57af72f5f937e88f0f1a554ae21cd
 };
 
 myTab.addEventListener("click", (event) => {
