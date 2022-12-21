@@ -3,7 +3,7 @@ import { FLIGHT_API_KEY } from "../api_keys/keys.js";
 const flightBaseUrl = `https://api.flightapi.io/`;
 
 function getFlights(userInput) {
-	let apiUrl = `${flightBaseUrl}roundtrip/${FLIGHT_API_KEY}/${userInput.fromLocation}/${userInput.toLocation}/${userInput.startDate}/${userInput.endDate}/1/0/0/Economy/USD`;
+	let apiUrl = `${flightBaseUrl}roundtrip/${FLIGHT_API_KEY}/${userInput.fromLocation}/${userInput.toLocation}/${userInput.startDate}/${userInput.endDate}/${userInput.numberOfAdults}/0/0/Economy/USD`;
 
 	fetch(apiUrl)
 		.then((res) => res.json())

@@ -75,36 +75,11 @@ h1 {
     margin: 15px auto;
 }
 
-#flightsContainer {
-    margin: 40px;
-    background-color: #BFCBC2;
-    border-radius: 5px;
-    padding: 20px;
-    height: 80vh;
-}
-
-#hotelsContainer {
+#flightsContainer, #hotelsContainer, #eventsContainer, #weatherContainer  {
     margin: 70px;
     background-color: #BFCBC2;
     border-radius: 5px;
     padding: 20px;
-    height: 80vh;
-}
-
-#eventsContainer {
-    margin: 70px;
-    background-color: #BFCBC2;
-    border-radius: 5px;
-    padding: 20px;
-    height: 80vh;
-}
-
-#weatherContainer {
-    margin: 70px;
-    background-color: #BFCBC2;
-    border-radius: 5px;
-    padding: 20px;
-    height: 80vh;
 }
 
 .weather-day {
@@ -114,16 +89,6 @@ h1 {
     justify-content: space-between;
     margin: 10px;
   }
-
-
-/* eventsContainer to grow with the number of cards */
-#eventsContainer {
-    margin: 70px;
-    background-color: #BFCBC2;
-    border-radius: 5px;
-    padding: 20px;
-    height: auto;
-}
 
 /* align the cards next to each other */
 .card-deck {
