@@ -75,7 +75,7 @@ h1 {
     margin: 15px auto;
 }
 
-#flightsContainer, #hotelsContainer, #eventsContainer, #weatherContainer  {
+#flightsContainer, #hotelsContainer, #eventsContainer, #weatherContainer, #attractionsContainer  {
     margin: 70px;
     background-color: #BFCBC2;
     border-radius: 5px;
