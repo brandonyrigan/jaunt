@@ -21,7 +21,6 @@
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.16.1/lodash.min.js"></script>
 		<script src="https://unpkg.com/fuse.js@2.5.0/src/fuse.min.js"></script>
 		<script src="https://screenfeedcontent.blob.core.windows.net/html/airports.js"></script>
-
 		<title>Jaunt</title>
 	</head>
 	<body>
@@ -39,9 +38,9 @@
 			<form id="tripForm">
 				<div class="mb-3">
 					<label for="tripName" class="form-label">Trip Name</label>
-					<input type="text" id="tripName" class="form-control"/>
+					<input type="text" id="tripName" class="form-control mb-3"/>
           <div class="col-md-2">
-          <select class="form-select" aria-label="Default select example" id="numberOfAdults">
+          <select class="form-select mb-3" aria-label="Default select example" id="numberOfAdults">
             <option value="" disabled selected>Number of adults</option>
             <option value="1">1</option>
             <option value="2">2</option>
@@ -79,7 +78,7 @@
                             class="form-control"
 							aria-label="From"
 							id="startDate"
-							placeholder="From Date"
+							placeholder="Start Date"
 						/>
 					</div>
 					<div class="col mb-3">
@@ -88,7 +87,7 @@
                             class="form-control"
 							aria-label="From"
 							id="endDate"
-							placeholder="To Date"
+							placeholder="End Date"
 						/>
 					</div>
 				</div>
@@ -100,7 +99,6 @@
 		<div id="tripContainer" class="container">
 			<h1>My Trips</h1>
 		</div>
-
 		<script src="./javascript/home/home.js"></script>
 		<script>
 			$(function () {

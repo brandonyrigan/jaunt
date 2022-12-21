@@ -112,8 +112,10 @@ function showHotel(data) {
   const hotelName = document.createElement("td");
   const hotelRoomDetails = document.createElement("td");
   const hotelPrice = document.createElement("td");
+  const detailsButton = document.createElement("button");
 
   hotelName.innerText = `${hotelDetails.hotel.name}`;
+  hotelName.setAttribute;
   hotelRoomDetails.innerText = `${hotelPriceDetails.room.typeEstimated.bedType}`;
   hotelPrice.innerText = `${hotelPriceDetails.price.base}`;
 
