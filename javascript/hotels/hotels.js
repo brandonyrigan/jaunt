@@ -105,46 +105,35 @@ const getHotelListByIataCode = async (token, tripDetails) => {
 
 function showHotel(data) {
   const hotelDetails = data.data[0];
-  const hotelPriceDetails = data.data[0].offers[0];
   console.log(hotelDetails);
-  console.log(hotelPriceDetails);
+  const hotelPriceDetails = data.data[0].offers[0];
+
+  let lat = hotelDetails.hotel.latitude;
+  let long = hotelDetails.hotel.longitude;
+  const key = `AIzaSyB0t_edILTp-9mg21S96kQ5ffGurDB9eAI`;
+  let url = `https://maps.googleapis.com/maps/api/staticmap?center=${lat},${long}&zoom=16&size=400x400&key=${key}`;
+
   const tableRow = document.createElement("tr");
   const hotelName = document.createElement("td");
   const hotelRoomDetails = document.createElement("td");
   const hotelPrice = document.createElement("td");
-  const detailsButton = document.createElement("button");
+  const mapButton = document.createElement("td");
+  const mapImage = document.createElement("img");
 
+  mapImage.setAttribute("src", url);
+  modalBody.innerHTML = `<img src="${url}" alt="mapImage"/>`;
   hotelName.innerText = `${hotelDetails.hotel.name}`;
   hotelName.setAttribute;
   hotelRoomDetails.innerText = `${hotelPriceDetails.room.typeEstimated.bedType}`;
   hotelPrice.innerText = `${hotelPriceDetails.price.base}`;
-
-  hotelName.onclick = function () {
-    // getPhoto(hotelname);
-    const modalElement = document.createElement("div");
-    modalElement.innerHTML = `
-    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-    <div class="card" style="width: 18rem;">
-      {/* <img src="..." class="card-img-top" alt="..."/> */}
-      <div class="card-body">
-        <h5 class="card-title">${hotelDetails.hotel.name}</h5>
-        <p class="card-text">Check-In: ${hotelPriceDetails.checkInDate}</p>
-        <p class="card-text">Check-Out: ${hotelPriceDetails.checkOutDate}</p>
-        <button
-          type="button"
-          class="btn-close"
-          data-mdb-dismiss="modal"
-          aria-label="Close"
-        ></button>
-      </div>
-    </div>
-  </div>
-  `;
-  };
+  mapButton.innerHTML = `
+  <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal">Map
+  </button> `;
 
   tableRow.appendChild(hotelName);
   tableRow.appendChild(hotelRoomDetails);
   tableRow.appendChild(hotelPrice);
+  tableRow.appendChild(mapButton);
   hotelTableBody.appendChild(tableRow);
 }
 
