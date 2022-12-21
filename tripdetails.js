@@ -29,7 +29,7 @@ window.onload = async (event) => {
   
   createCards(events);
 
-  getFlights(tripDetails);
+ // getFlights(tripDetails);
   getAmadeusKey(tripDetails);
 };
 
