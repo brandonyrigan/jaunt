@@ -16,6 +16,9 @@ window.onload = async (event) => {
 	console.log(tripDetails);
 	loadTripDetailsHeader();
 
+	// getFlights(tripDetails);
+	getAmadeusKey(tripDetails);
+
 	const city = await getCity(tripDetails.toLocation);
 
 	getWeather(city);
@@ -23,9 +26,6 @@ window.onload = async (event) => {
 	const events = getEvents(city).then((event) => {
 		createCards(event);
 	});
-
-	// getFlights(tripDetails);
-	// getAmadeusKey(tripDetails);
 };
 
 myTab.addEventListener("click", (event) => {
