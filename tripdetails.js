@@ -1,9 +1,8 @@
 import { getFlights } from "./javascript/flights/flights.js";
 import { getAmadeusKey } from "./javascript/hotels/hotels.js";
-import { getEvents, createCards } from "./javascript/tickets/ticketService.js"; 
-import {getWeather} from "./javascript/weather/weather.js";
-import {getCity} from "./javascript/helper/helpers.js";
-
+import { getEvents, createCards } from "./javascript/tickets/ticketService.js";
+import { getWeather } from "./javascript/weather/weather.js";
+import { getCity } from "./javascript/helper/helpers.js";
 
 window.onload = async (event) => {
   let tripDetails = {
@@ -16,27 +15,19 @@ window.onload = async (event) => {
   };
   console.log(tripDetails);
   loadTripDetailsHeader();
-<<<<<<< HEAD
-  // getFlights(tripDetails);
-  getAmadeusKey(tripDetails);
-=======
-//  getFlights(tripDetails);
-// return city name from form input
-  
+  //  getFlights(tripDetails);
+  // return city name from form input
+
   const city = await getCity(tripDetails.toLocation);
 
-  
   getWeather(city);
-  
-  const events = getEvents(city).then
-  (event => {
+
+  const events = getEvents(city).then((event) => {
     createCards(event);
   });
-  
 
- // getFlights(tripDetails);
- // getAmadeusKey(tripDetails);
->>>>>>> bf3bc5c025d57af72f5f937e88f0f1a554ae21cd
+  // getFlights(tripDetails);
+  getAmadeusKey(tripDetails);
 };
 
 myTab.addEventListener("click", (event) => {
