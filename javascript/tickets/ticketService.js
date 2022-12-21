@@ -4,7 +4,7 @@ const apikey = "Lb9duPQSfmOhyMAeBS88Dxum5ksUZAPO";
  async function getEvents(cityName) {
     const urlToFetch = baseurl + "apikey=" + apikey + "&city=" + cityName;
     try {
-        const response =  fetch(urlToFetch);
+        const response = await  fetch(urlToFetch);
         if (response.ok) {
             const jsonResponse = await response.json();
             const events = jsonResponse._embedded.events;
@@ -31,7 +31,7 @@ const apikey = "Lb9duPQSfmOhyMAeBS88Dxum5ksUZAPO";
     }
 }
 
-function createCards(cardData) {
+async function createCards(cardData) {
     // Create a container element to hold all the cards
     const container = document.getElementById("events");
     const cardhtml = [];
