@@ -12,8 +12,8 @@ window.onload = (event) => {
   };
   console.log(tripDetails);
   loadTripDetailsHeader();
-  getFlights(tripDetails);
-  getAmadeusKey(tripDetails);
+  // getFlights(tripDetails);
+  // getAmadeusKey(tripDetails);
 };
 
 myTab.addEventListener("click", (event) => {
