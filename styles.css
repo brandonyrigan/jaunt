@@ -103,20 +103,7 @@ h1 {
         flex: 0 0 30%;
         max-width: 30%;
     }
-
-
-
-  
-#flightsNav {
-    height: 20px;
-}
  
-#hotelsNav {
-    height: 20px;
-}
-#eventsNav {
-    height: 20px;
-}
-#weatherNav {
+#flightsNav, #hotelsNav, #eventsNav, #weatherNav {
     height: 20px;
 }
