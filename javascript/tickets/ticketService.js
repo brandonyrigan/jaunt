@@ -49,8 +49,9 @@ async function createCards(cardData) {
     <p class="card-text">${card.city}</p>
     <p class="card-text">${card.venue}</p>
     <p class="card-text">${card.date}</p>
-    <a href="${card.link}" class="btn btn-success">Buy Tickets</a>
+    
   </div>
+  <a href="${card.link}" class="btn btn-success mb-3" target="_blank">Buy Tickets</a>
 </div>
 `);
 

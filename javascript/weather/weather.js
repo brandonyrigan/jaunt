@@ -16,7 +16,7 @@ function showWeather(jsonResponse) {
 		weatherHTML.push(`
       <div class="weather-day">
         <p>${weather[i].dt_txt.slice(5, 10)}</p>
-        <img src="http://openweathermap.org/img/w/${
+        <img src="https://openweathermap.org/img/w/${
 			weather[i].weather[0].icon
 		}.png" alt="weather icon">
         <p>${weather[i].main.temp}°F</p>

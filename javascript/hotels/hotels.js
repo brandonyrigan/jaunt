@@ -56,7 +56,7 @@ const getHotelListByIataCode = async (token, tripDetails) => {
 		catch: "default",
 	})
 		.then(async (response) => {
-			const dataSliced = response.data.slice(0, 10);
+			const dataSliced = response.data.slice(0, 20);
 			if (dataSliced) {
 				for (const hotel of dataSliced) {
 					const hotelId = hotel.hotelId;
@@ -71,9 +71,10 @@ const getHotelListByIataCode = async (token, tripDetails) => {
 							},
 							mode: "cors",
 							catch: "default",
+							timeout: 6000,
 						}
 					)
-						.then((response) => showHotel(response))
+						.then(async (response) => await showHotel(response))
 						.catch((error) => console.log(error));
 				}
 			} else {
@@ -107,6 +108,7 @@ const getHotelListByIataCode = async (token, tripDetails) => {
 // };
 
 function showHotel(data) {
+	console.log(data);
 	const hotelDetails = data.data[0];
 	console.log(hotelDetails);
 	const hotelPriceDetails = data.data[0].offers[0];
