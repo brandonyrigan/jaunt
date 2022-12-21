@@ -7,7 +7,7 @@ var requestOptions = {
 //&format=json&apiKey=YOUR_API_KEY
 
 //return a list of attractions
-function getLongandLat(city) {
+async function getLongandLat(city) {
     fetch(`https://api.geoapify.com/v1/geocode/search?text=${city}&format=json&apiKey=${api_key}`, requestOptions)
     .then(response => response.json())
     .then(result => {

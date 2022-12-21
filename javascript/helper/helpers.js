@@ -1,21 +1,19 @@
+// open file in browser to see output in console
 
 
-function getCity(airportCode) {
-    const airport = fetch("javascript/data/airports.json");
-    airport.then(function (response) {
-        return response.json();
-    }).then(function (json) {
-        for (let i = 0; i < json.length; i++) {
-            if (json[i].IATA === airportCode) {
-                console.log(json[i].city);
-                return json[i].city;
-            }
-        }
-    });
+// look up airportCode return city name
+async function getCity(airportCode) {
+    const airport = await fetch("javascript/data/airports.json");
+    const airportJson =  await airport.json();
+
+    const city = airportJson.find(a => a.IATA == airportCode);
+
+    return city.city;
+    
 }
 
-export { getCity };
 
+export { getCity };
 
 
 

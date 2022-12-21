@@ -112,23 +112,32 @@ h1 {
     flex-wrap: nowrap;
     align-items: center;
     justify-content: space-between;
-    margin: 10px 70px;
+    margin: 10px;
   }
 
-/* all cards in a row side by side */
-#events .card {
-    display: inline-flex;
+
+/* eventsContainer to grow with the number of cards */
+#eventsContainer {
+    margin: 70px;
+    background-color: #BFCBC2;
+    border-radius: 5px;
+    padding: 20px;
+    height: auto;
+}
+
+/* align the cards next to each other */
+.card-deck {
+    display: flex;
     flex-wrap: nowrap;
     align-items: center;
     justify-content: space-between;
     margin: 10px 70px;
-    
   }
-
-/* card-tab-pane grow to fit card */
-.tab-pane {
-    flex-grow: 1;
-}
+  /* move cards to center */
+    .card-deck .card {
+        flex: 0 0 30%;
+        max-width: 30%;
+    }
 
 
 
