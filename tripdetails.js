@@ -1,5 +1,5 @@
 import { getFlights } from "./javascript/flights/flights.js";
-import { getHotelListByIataCode } from "./javascript/hotels/hotels.js";
+import { getAmadeusKey } from "./javascript/hotels/hotels.js";
 
 window.onload = (event) => {
   let tripDetails = {
@@ -8,10 +8,12 @@ window.onload = (event) => {
     toLocation: localStorage.getItem("toLocation"),
     startDate: localStorage.getItem("startDate"),
     endDate: localStorage.getItem("endDate"),
+    numberOfAdults: localStorage.getItem("numberOfAdults"),
   };
-
+  console.log(tripDetails);
   loadTripDetailsHeader();
   getFlights(tripDetails);
+  getAmadeusKey(tripDetails);
 };
 
 myTab.addEventListener("click", (event) => {
